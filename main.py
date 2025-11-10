@@ -1,34 +1,90 @@
+import sys
 print("Welcome to the H&M Chatbot")
 
 def chatbot_greeting():
-    name = input("What is your name? ")
-    age = input(f"Hello {name} what is your age? ")
-    print(f"Great to here that even at {age} you still choose to shop at H&M")
+    while True:
+        name = input("What is your name? ")
+        if name.isdigit(): #new function learned. It checks if the string entered is a digit
+            print("Invalid option. Please enter only letters")
+        else:
+            break
+    while True:
+        age = input(f"Hello {name} what is your age? ")
+        if age.isdigit():
+            print(f"Great to here that even at {age} you still choose to shop at H&M")
+            break
+        else:
+            print("Invalid option. Please enter a number")      
 
-def display_menu():
-    print("1. Placeholder")
-    print("2. Placeholder")
+def main_menu():
+    in_use = True
+    print("\nHow may I assist you?")
+    print("-------------------------------------")
+    print("1. Rate a Purchase")
+    print("2. Write a Review")
     print("3. Placeholder")
     print("4. Exit")
-
-def user_selection():
-    in_use = True
     user_input = input("\nEnter a number between 1-4: ")
     if user_input == "1":
-        print("1")
+        product_review()
     elif user_input == "2":
-        print("2")
+        product_review()
     elif user_input == "3":
         print("3")
     elif user_input == "4":
-        print("Exit program")
+        print("Aw sorry you had to go. Goodbye!")
         in_use = False
     else:
         print("Invalid option: please enter a number between 1-4")
     return in_use
 
+def return_main_menu():
+    while True:
+        user_choice = input("Would you like to return to the main menu? Yes/No: ")
+        if user_choice.lower() == "yes":
+            return main_menu()
+        elif user_choice.lower() == "no":
+            print("Aw sorry to see you go. Have a great rest of your day!")
+            sys.exit()
+        else:
+            print("Invalid option. Please enter either Yes or No.")
+
+def product_rating():
+    rating = input("Please enter the product you have purchased: ")
+    print(f"The product you have chosen is {rating}.")
+
+    while True:
+        user_rating = input(f"On a 1-5 Star rating scale how would you rate {rating}? ")
+        if user_rating in ["1", "2", "3", "4", "5"]:
+            rating = int(user_rating)
+            
+            if rating == 5:
+                print("I'm glad that you enjoyed your purchase! We hope that we can continue to satisfy you at H&M!")       
+            elif rating == 4:
+                print("Glad to see that you enjoyed the purchase.")
+            elif rating == 3:
+                print("Middle of the road is decent.") 
+            elif rating == 2:
+                print("Aw we're sad to see your not as sastified as you can be.") 
+            elif rating == 1:
+                print("we are sad to see that you didn't enjoy your purchase. We hope we can do better next time.")
+
+            return_main_menu()
+            break
+        else:
+            print("Please enter a number between 1-5")
+    
+def product_review():
+    review = input("Please enter the product you have purchased: ")
+    print(f"The product you have chosen is {review}.")
+    print("-------------------------------------")
+    print("Please enter your review:")
+    user_review = input("")
+    print("Thank you for sharing your review.")
+    return_main_menu()
+    
+
 
 
 chatbot_greeting()
-display_menu()
-user_selection()
+main_menu()
