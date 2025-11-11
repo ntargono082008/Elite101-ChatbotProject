@@ -26,7 +26,7 @@ def main_menu():
     print("4. Exit")
     user_input = input("\nEnter a number between 1-4: ")
     if user_input == "1":
-        product_review()
+        product_rating()
     elif user_input == "2":
         product_review()
     elif user_input == "3":
